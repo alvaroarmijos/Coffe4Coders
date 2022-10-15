@@ -21,16 +21,16 @@ val Typography = Typography(
         fontSize = 24.sp,
         color = Color.White
     ),
-    /* Other default text styles to override
-    button = TextStyle(
+    h3 = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.W500,
-        fontSize = 14.sp
+        fontWeight = FontWeight.Bold,
+        fontSize = 24.sp,
+        color = Color.Black
     ),
-    caption = TextStyle(
+    body2 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp
-    )
-    */
+        fontSize = 16.sp,
+        color = Font
+    ),
 )
