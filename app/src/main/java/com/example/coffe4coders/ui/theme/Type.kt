@@ -33,4 +33,16 @@ val Typography = Typography(
         fontSize = 16.sp,
         color = Font
     ),
+    h5 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 24.sp,
+        color = Color.Black
+    ),
+    caption = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        color = PlaceHolder
+    ),
 )

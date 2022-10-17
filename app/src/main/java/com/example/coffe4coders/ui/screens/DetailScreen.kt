@@ -30,16 +30,7 @@ fun DetailScreen(
             }
         },
         content = {
-            Column() {
-                Text(text = "Soy un producto de : ${countryISO.iso}", style = MaterialTheme.typography.h3)
-                Button(onClick = {
-                    navController.navigate("feed"){
-                        popUpTo("feed")
-                    }
-                }) {
-                    Text(text = "Volver")
-                }
-            }
+
         }
     )
 
