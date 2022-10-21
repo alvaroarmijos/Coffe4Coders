@@ -9,18 +9,22 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.coffe4coders.models.Product
 import com.example.coffe4coders.ui.components.*
+import com.example.coffe4coders.ui.theme.Coffe4CodersTheme
+import com.example.coffe4coders.utilities.MockDataProvider
 
 @Composable
 fun CheckoutScreen(
     navController: NavController,
-    country: CountryISO,
+    product: Product,
 ) {
     val cities = listOf(
         "Mexico City, Mexico",
@@ -38,24 +42,27 @@ fun CheckoutScreen(
     var phone by remember { mutableStateOf("") }
     var address by remember { mutableStateOf("") }
     var city by remember { mutableStateOf("") }
+    var message by remember { mutableStateOf<String?>(null) }
 
     Scaffold(
         topBar = {
             CustomAppBar(navigationIcon = Icons.Filled.ArrowBack){
-                navController.navigate("detail/${country.iso}")
+                navController.navigate("detail/${product.id}")
             }
 
         },
         content = {
+            Alert(title = "Felicidades", message = message) {
+                navController.navigate("feed"){
+                    launchSingleTop = true
+                    popUpTo("feed")
+                }
+            }
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState())
             ) {
                 ProductCard(
-                    name = "Café de Colombia",
-                    summary = "Café de las montañas",
-                    price = 35.00,
-                    currency = "USD",
-                    country = country
+                    product
                 ) {}
 
                 Column(
@@ -91,13 +98,15 @@ fun CheckoutScreen(
                         }
                     }
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(text = "$ 45.00 USD",
                         style = MaterialTheme.typography.h5,
                         textAlign = TextAlign.Start)
                         CustomButton(label = "Finalizar Pedido") {
-
+                            //Validate all fields
+                            message = "Tu pedido ha sido creado :)"
                         }
                     }
                 }
@@ -115,6 +124,13 @@ fun CheckoutScreen(
 )
 @Composable
 fun CheckoutScreenPreview() {
-    val navController = rememberNavController()
-    CheckoutScreen(navController, CountryISO.COL)
+    val product = MockDataProvider.getProductBy(0)
+    if (product!=null){
+        val navController = rememberNavController()
+        Coffe4CodersTheme {
+            CheckoutScreen(navController, product)
+        }
+    } else {
+        Text(text = "Error en preview")
+    }
 }

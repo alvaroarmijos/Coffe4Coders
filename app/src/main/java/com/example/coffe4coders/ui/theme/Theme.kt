@@ -26,9 +26,15 @@ fun Coffe4CodersTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Comp
         LightColorPalette
     }
 
+    val type = if (darkTheme) {
+        TypographyDark
+    } else {
+        TypographyDark
+    }
+
     MaterialTheme(
         colors = colors,
-        typography = Typography,
+        typography = type,
         shapes = Shapes,
         content = content
     )
